@@ -203,9 +203,21 @@ public:
 	 */
 	void create(uint8_t location, uint8_t charmap[]);
 
+	/**
+	 * @brief Write a character array into the lcd
+	 * @brief You can't continuously use write, with Arduino mbed for portentaH7, so write array sends each letter one at a time
+	 * 
+	 * @brief NB : When the array exceeds 20 characters it wraps to the next line
+	 * 
+	 * @param str
+	 */
+	void write_array(const char *str);
+
 	virtual size_t write(uint8_t value);
 
 	virtual size_t write(const uint8_t *buffer, size_t size);
+
+
 
 private:
 	void reset();

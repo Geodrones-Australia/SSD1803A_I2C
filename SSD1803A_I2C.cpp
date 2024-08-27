@@ -309,6 +309,13 @@ size_t SSD1803A_I2C::write(const uint8_t *buffer, size_t size) {
 	return size;
 	}
 
+void SSD1803A_I2C::write_array(const char *str) {
+	size_t size = strlen(str);
+	for (int i = 0; i < size; i++) {
+		write(str[i]);
+	}
+}
+
 void SSD1803A_I2C::finishCommand() {
 	if(lines == 4) sendCommand(COMMAND_8BIT_4LINES_RE0_IS0);
 	else sendCommand(COMMAND_8BIT_4LINES_RE0_IS0_DH1);
@@ -334,3 +341,4 @@ void SSD1803A_I2C::sendBuffer(const uint8_t *buffer, size_t size) {
 	while (size--) i2cPort->write(*buffer++);
 	i2cPort->endTransmission();
 	}
+
